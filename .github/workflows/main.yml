@@ -1,29 +1,37 @@
-name: Data Preprocessing Workflow
+name: Churn Prediction Pipeline
 
-# Trigger: Workflow akan jalan setiap kali kamu nge-push ke branch 'main'
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  run-preprocessing:
+  build-and-train:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Checkout code
+    # 1.  kodingan dari GitHub
+    - name: Checkout Code
       uses: actions/checkout@v3
-    - name: Set up Python 3.12.7
+
+    # 2.  Python
+    - name: Set up Python 3.12
       uses: actions/setup-python@v4
       with:
-        python-version: "3.12.7"
+        python-version: '3.12'
 
-    # 3. Install Library 
-    - name: Install dependencies
+    # 3. Install Library
+    - name: Install Dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install mlflow dagshub pandas scikit-learn matplotlib seaborn
 
-    # 4. Jalankan script otomatisasi 
-
-    - name: Run Preprocessing Script
-      run: python automate_Elsa.py
+    # 4.  MLflow Project
+    - name: Run Training Experiment
+      env:
+        MLFLOW_TRACKING_URI: https://dagshub.com/elsaamundi/submission-sml-elsa.mlflow
+        MLFLOW_TRACKING_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+        MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+      run: |
+        cd Workflow-CI/MLProject
+        mlflow run . --no-conda
