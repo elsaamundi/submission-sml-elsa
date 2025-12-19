@@ -61,14 +61,6 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-<<<<<<< HEAD
-        # Kita coba path ini dulu, kalau error nanti kita lihat hasil cek struktur di atas
         context: Workflow-CI/MLProject
         push: true
         tags: elsa88/churn-prediction:latest
-=======
-        # GANTI TITIK JADI NAMA FOLDER INI:
-        context: Workflow-CI/MLProject
-        push: true
-        tags: elsa88/churn-prediction:latest
->>>>>>> 0371a80df6b752fe596c6212a14b1317e6814f17
