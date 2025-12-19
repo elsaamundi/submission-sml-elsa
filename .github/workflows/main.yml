@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    # 1.  kodingan dari GitHub
+    # 1. Ambil kodingan dari GitHub
     - name: Checkout Code
       uses: actions/checkout@v3
 
@@ -29,10 +29,10 @@ jobs:
     # 4. Jalankan MLflow Project
     - name: Run Training Experiment
       env:
-        MLFLOW_TRACKING_URI: https://dagshub.com/elsaamundi/submission-sml-elsa.mlflow
-        MLFLOW_TRACKING_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
-        MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
-        DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        MLFLOW_TRACKING_URI: 'https://dagshub.com/elsaamundi/submission-sml-elsa.mlflow'
+        MLFLOW_TRACKING_USERNAME: '${{ secrets.DAGSHUB_USERNAME }}'
+        MLFLOW_TRACKING_PASSWORD: '${{ secrets.DAGSHUB_TOKEN }}'
+        DAGSHUB_USER_TOKEN: '${{ secrets.DAGSHUB_TOKEN }}'
       run: |
         cd Workflow-CI/MLProject
         mlflow run . --env-manager=local
