@@ -52,13 +52,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-<<<<<<< HEAD
+        # GANTI TITIK JADI NAMA FOLDER INI:
         context: Workflow-CI/MLProject
         push: true
         tags: elsa88/churn-prediction:latest
-=======
-        context: .  
-        
-        push: true
-        tags: elsa88/churn-prediction:latest
->>>>>>> 3783ce84c0786991c10e6c25181086f90ff5681e
