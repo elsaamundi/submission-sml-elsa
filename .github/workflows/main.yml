@@ -26,7 +26,7 @@ jobs:
       run: |
         pip install mlflow dagshub pandas scikit-learn matplotlib seaborn
 
-    # 4. Jalankan MLflow Project
+    # 4. Jalankan MLflow Project (Training)
     - name: Run Training Experiment
       env:
         MLFLOW_TRACKING_URI: 'https://dagshub.com/elsaamundi/submission-sml-elsa.mlflow'
@@ -36,3 +36,22 @@ jobs:
       run: |
         cd Workflow-CI/MLProject
         mlflow run . --env-manager=local
+
+    # =========================================
+    # BAGIAN BARU (DOCKER) MULAI DARI SINI
+    # =========================================
+
+    # 5. Login ke Docker Hub (Pakai Secret yang barusan dibuat)
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}  # Ini ngambil "elsa88"
+        password: ${{ secrets.DOCKER_PASSWORD }}  # Ini ngambil Token 
+
+    # 6. Build & Push Image
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: Workflow-CI/MLProject
+        push: true
+        tags: elsa88/churn-prediction:latest
