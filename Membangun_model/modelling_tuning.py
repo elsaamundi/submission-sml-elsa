@@ -10,6 +10,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 
+try:
+    dagshub.auth.add_app_token(os.environ["DAGSHUB_TOKEN"])
+except:
+    print("Token tidak ditemukan di env, pastikan login manual.")
+
+dagshub.init(...)
+
 # --- Setup DagsHub & MLflow ---
 dagshub.init(repo_owner='elsaamundi', repo_name='submission-sml-elsa', mlflow=True)
 mlflow.set_tracking_uri("https://dagshub.com/elsaamundi/submission-sml-elsa.mlflow")
