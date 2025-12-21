@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/Elsa/OneDrive/Documents/AYA/Asah/project submission/Eksperimen
+  SML Elsa/Membangun_model/mlruns/1/models/m-e2ace88ae0fe46efbef778e5955b171e/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.9
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 3.7.0
+model_id: m-e2ace88ae0fe46efbef778e5955b171e
+model_size_bytes: 2449155
+model_uuid: m-e2ace88ae0fe46efbef778e5955b171e
+prompts: null
+run_id: 4a0a75448cb14dcfb1f65bc736f8ca76
+utc_time_created: '2025-12-21 19:18:49.781431'
