@@ -30,12 +30,9 @@ jobs:
 
     # 4. Jalankan MLflow Project (Training)
     - name: Run Training Experiment
-      run: |
-        # Masuk ke folder yang bener
+      run: | 
         cd Workflow-CI/MLProject
-        
-        # Jalanin MLflow (Environment Manager local biar gak ribet conda)
-        mlflow run . --env-manager=local
+        mlflow run . --experiment-name Eksperimen_CI_Docker --env-manager=local
 
     # =========================================
     # BAGIAN DOCKER (KRITERIA 3)
