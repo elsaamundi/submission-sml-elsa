@@ -52,5 +52,5 @@ jobs:
         # INI YANG TADI SALAH (Hapus "cd"-nya)
         context: Workflow-CI/MLProject
         push: true
-        # Ganti 'elsa88' dengan username dockerhub asli kamu
-        tags: elsaamundi/churn-prediction:latest
+        
+        tags: elsa88/churn-prediction:latest
