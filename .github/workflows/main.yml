@@ -16,38 +16,29 @@ jobs:
       uses: actions/checkout@v3
 
     # 2. Siapkan Python
-    - name: Set up Python 3.12
+    - name: Set up Python 3.10
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'
+        python-version: '3.10' 
+        # Saran: Pake 3.10 aja yang lebih stabil buat MLflow, 3.12 kadang rewel sama library lama.
 
     # 3. Install Library
     - name: Install Dependencies
       run: |
-        pip install mlflow dagshub pandas scikit-learn matplotlib seaborn
+        pip install mlflow pandas scikit-learn matplotlib seaborn
+        # Gak perlu install dagshub kalau di script python udah gak dipake
 
     # 4. Jalankan MLflow Project (Training)
     - name: Run Training Experiment
-      env:
-        MLFLOW_TRACKING_URI: 'https://dagshub.com/elsaamundi/submission-sml-elsa.mlflow'
-        MLFLOW_TRACKING_USERNAME: '${{ secrets.DAGSHUB_USERNAME }}'
-        MLFLOW_TRACKING_PASSWORD: '${{ secrets.DAGSHUB_TOKEN }}'
-        DAGSHUB_USER_TOKEN: '${{ secrets.DAGSHUB_TOKEN }}'
       run: |
-        cd MLProject
+        # Masuk ke folder yang bener
+        cd Workflow-CI/MLProject
+        
+        # Jalanin MLflow (Environment Manager local biar gak ribet conda)
         mlflow run . --env-manager=local
 
     # =========================================
-    # STEP BARU: DEBUGGING (Cek File)
-    # =========================================
-    - name: Cek Struktur Folder
-      run: |
-        echo "=== LIST SEMUA FILE ==="
-        ls -R
-        echo "======================="
-
-    # =========================================
-    # BAGIAN DOCKER
+    # BAGIAN DOCKER (KRITERIA 3)
     # =========================================
 
     # 5. Login ke Docker Hub
@@ -61,6 +52,8 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: MLProject
+        # INI YANG TADI SALAH (Hapus "cd"-nya)
+        context: Workflow-CI/MLProject
         push: true
-        tags: elsa88/churn-prediction:latest
+        # Ganti 'elsa88' dengan username dockerhub asli kamu
+        tags: elsaamundi/churn-prediction:latest

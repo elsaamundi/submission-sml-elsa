@@ -6,7 +6,7 @@ import os
 def preprocess_data():
     # 1. Definisikan Path (Lokasi File)
     # Sesuaikan dengan struktur folder yang sudah kita buat
-    raw_data_path ="dataset/telco_churn_raw.csv"
+    raw_data_path ="dataset_raw/telco_churn_raw.csv"
     output_path = 'telco_churn_preprocessing/train_processed.csv'
 
     # Cek apakah file dataset ada
